@@ -1,0 +1,1292 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API SII - V1",
+    "description" : "API del SII",
+    "termsOfService" : "http://www.sii.cl/",
+    "contact" : {
+      "email" : "api@sii.cl"
+    },
+    "license" : {
+      "name" : "Licencia SII",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.5"
+  },
+  "externalDocs" : {
+    "description" : "Find out more about Swagger",
+    "url" : "http://swagger.io"
+  },
+  "servers" : [ {
+    "url" : "https://{host}/{context}",
+    "variables" : {
+      "context" : {
+        "default" : "recursos/v1",
+        "enum" : [ "/recursos/v1" ]
+      },
+      "host" : {
+        "description" : "* api.sii.cl          # Servidor de produccion\n* api-cert.sii.cl     # Servidor de Certificacion Contribuyentes\n* api-dev.sii.cl    # Servidor de desarrollo interno del SII - 1\n",
+        "default" : "api-cert.sii.cl",
+        "enum" : [ "api.sii.cl", "api-cert.sii.cl", "api-dev.sii.cl" ]
+      }
+    }
+  } ],
+  "tags" : [ {
+    "name" : "recursos",
+    "description" : "Recursos de las Boletas Electronicas",
+    "externalDocs" : {
+      "description" : "Find out more",
+      "url" : "http://www.sii.cl"
+    }
+  }, {
+    "name" : "globales",
+    "description" : "Definiciones globales de Boleta Electronica",
+    "externalDocs" : {
+      "description" : "Find out more",
+      "url" : "http://www.sii.cl"
+    }
+  } ],
+  "paths" : {
+    "/globales/boleta.electronica.estado" : {
+      "get" : {
+        "tags" : [ "globales" ],
+        "summary" : "Informacion de los estados de la boleta electronica",
+        "description" : "Informacion de los estados de la boleta electronica",
+        "operationId" : "globales.boleta.electronica.estado",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200"
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/globales/boleta.electronica.tipo" : {
+      "get" : {
+        "tags" : [ "globales" ],
+        "summary" : "Tipos de Boleta Electronica",
+        "description" : "Tipos de Boleta Electronica",
+        "operationId" : "globales.boleta.electronica.tipo",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200_1"
+                  }
+                },
+                "example" : [ {
+                  "codigo" : 39,
+                  "descripcion" : "Boleta Electronica"
+                }, {
+                  "codigo" : 41,
+                  "descripcion" : "Boleta Exenta Electronica"
+                } ]
+              }
+            }
+          },
+          "401" : {
+            "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/globales/boleta.electronica.nivel" : {
+      "get" : {
+        "tags" : [ "globales" ],
+        "summary" : "Nivel de Error en documento boleta electronica.",
+        "description" : "Nivel de Error en documento boleta electronica.",
+        "operationId" : "globales.boleta.electronica.nivel",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200_1"
+                  }
+                },
+                "example" : [ {
+                  "codigo" : 1,
+                  "descripcion" : "Reparo leve"
+                }, {
+                  "codigo" : 2,
+                  "descripcion" : "Reparo"
+                }, {
+                  "codigo" : 3,
+                  "descripcion" : "Rechazo"
+                } ]
+              }
+            }
+          },
+          "401" : {
+            "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/globales/boleta.electronica.seccion" : {
+      "get" : {
+        "tags" : [ "globales" ],
+        "summary" : "Secciones de un documewnto boleta que pueden contener errores",
+        "description" : "Secciones de un documento boleta que pueden contener errores",
+        "operationId" : "globales.boleta.electronica.seccion",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200"
+                  }
+                },
+                "example" : [ {
+                  "codigo" : "ENV",
+                  "descripcion" : "Envio"
+                }, {
+                  "codigo" : "CRT",
+                  "description" : "Caratula"
+                } ]
+              }
+            }
+          },
+          "401" : {
+            "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boleta.electronica.semilla" : {
+      "get" : {
+        "tags" : [ "recursos" ],
+        "summary" : "Obtener un numero generado en el SII. Tiene 2 minutos para usarlo",
+        "description" : "Obtencion de la semilla.",
+        "operationId" : "getSemilla",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Location"
+                }
+              },
+              "Retry-After" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Retry-After"
+                }
+              },
+              "X-RateLimit-Limit" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Limit"
+                }
+              },
+              "X-RateLimit-Remaining" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Remaining"
+                }
+              },
+              "X-RateLimit-Reset" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Reset"
+                }
+              }
+            },
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Error inesperado",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/boleta.electronica.token" : {
+      "post" : {
+        "tags" : [ "recursos" ],
+        "summary" : "Obtener un numero token. Se puede usar durante 1 hora, per se renuieva por otra hora, desde su ultima utilizacion",
+        "description" : "Obtencion del token",
+        "operationId" : "token",
+        "requestBody" : {
+          "description" : "Obtener Token",
+          "content" : {
+            "application/xml" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Error inesperado",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/boleta.electronica.envio" : {
+      "post" : {
+        "tags" : [ "recursos" ],
+        "summary" : "Almacenamiento de un conjunto de boletas en el SII",
+        "description" : "Se debe adjuntar un archivo xml, que contiene un conjunto de boleta con el formato definido en <a href=\"http://www.sii.cl\">Formato Xml de la Boleta</a>\nTambien puede ver una documentacion en PDF <a href=\"http://www.sii.cl\">Formato PDF de la Boleta</a>\n",
+        "operationId" : "boleta.electronica.grabacion",
+        "parameters" : [ {
+          "name" : "User-Agent",
+          "in" : "header",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "Mozilla/4.0 ( compatible; PROG 1.0; Windows NT)"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Grabacion de la Boleta Electronica",
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Location"
+                }
+              },
+              "Retry-After" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Retry-After"
+                }
+              },
+              "X-RateLimit-Limit" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Limit"
+                }
+              },
+              "X-RateLimit-Remaining" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Remaining"
+                }
+              },
+              "X-RateLimit-Reset" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Reset"
+                }
+              },
+              "Etag" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Etag"
+                }
+              },
+              "Last-Modified" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Last-Modified"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultadoPostData"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Error inesperado",
+            "content" : { }
+          }
+        },
+        "security" : [ {
+          "TOKEN" : [ ]
+        } ],
+        "x-codegen-request-body-name" : "body"
+      }
+    },
+    "/boleta.electronica.envio/{rut}-{dv}-{trackid}" : {
+      "get" : {
+        "tags" : [ "recursos" ],
+        "summary" : "Obtencion del estado del envio",
+        "description" : "Obtencion del estado del envio",
+        "operationId" : "boleta.electronica.envio",
+        "parameters" : [ {
+          "name" : "rut",
+          "in" : "path",
+          "description" : "rut de la empresa emisora de la boleta",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "dv",
+          "in" : "path",
+          "description" : "dv de la empresa emisora de la boleta",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "trackid",
+          "in" : "path",
+          "description" : "identificacion del envio",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "maxLength" : 36,
+            "type" : "string"
+          }
+        }, {
+          "name" : "If-None-Match",
+          "in" : "header",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/headers/If-None-Match"
+          }
+        }, {
+          "name" : "If-Modified-Since",
+          "in" : "header",
+          "required" : false,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "$ref" : "#/components/headers/If-Modified-Since"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Location"
+                }
+              },
+              "Retry-After" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Retry-After"
+                }
+              },
+              "X-RateLimit-Limit" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Limit"
+                }
+              },
+              "X-RateLimit-Remaining" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Remaining"
+                }
+              },
+              "X-RateLimit-Reset" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Reset"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultadoEnvioDataRespuesta"
+                },
+                "example" : {
+                  "rut_emisor" : "45000054-K",
+                  "rut_envia" : "8315495-0",
+                  "trackid" : 1014,
+                  "fecha_recepcion" : "30/07/2020 07:57:42",
+                  "estado" : "EPR",
+                  "estadistica" : [ {
+                    "tipo" : 39,
+                    "informados" : 3,
+                    "aceptados" : 2,
+                    "rechazados" : 1,
+                    "reparos" : 0
+                  }, {
+                    "tipo" : 41,
+                    "informados" : 1,
+                    "aceptados" : 0,
+                    "rechazados" : 0,
+                    "reparos" : 1
+                  } ],
+                  "detalle_rep_rech" : [ {
+                    "tipo" : 39,
+                    "folio" : 1200,
+                    "estado" : "DOK",
+                    "descripcion" : "Dte Aceptado",
+                    "error" : null
+                  }, {
+                    "tipo" : 39,
+                    "folio" : 1201,
+                    "estado" : "DOK",
+                    "descripcion" : "Dte Aceptado",
+                    "error" : null
+                  }, {
+                    "tipo" : 39,
+                    "folio" : 1202,
+                    "estado" : "RCH",
+                    "descripcion" : "Dte Rechazado",
+                    "error" : [ {
+                      "seccion" : "CRT",
+                      "linea" : 155,
+                      "nivel" : 3,
+                      "codigo" : 11,
+                      "descripcion" : "RUT envia diferente al Upload",
+                      "detalle" : "[155]LSX-00291 value 0.52 is not declared"
+                    }, {
+                      "seccion" : "HED",
+                      "linea" : 222,
+                      "nivel" : 3,
+                      "codigo" : 100,
+                      "descripcion" : "Valor Detalle Distinto a Precio * Cantidad",
+                      "detalle" : "[83154495-0] <> [9145888-K]"
+                    } ]
+                  }, {
+                    "folio" : 3500,
+                    "estado" : "RPR",
+                    "descripcion" : "Dte Aceptado con reparos",
+                    "error" : [ {
+                      "seccion" : "DET",
+                      "linea" : 2,
+                      "nivel" : 1,
+                      "codigo" : 200,
+                      "descripcion" : "Valor Detalle Distinto a Precio * Cantidad",
+                      "detalle" : "[2500 <> 3500]"
+                    } ]
+                  } ]
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "TOKEN" : [ ]
+        } ],
+        "x-codegen-request-body-name" : "body"
+      }
+    },
+    "/boleta.electronica/{rut}-{dv}-{tipo}-{folio}/estado" : {
+      "get" : {
+        "tags" : [ "recursos" ],
+        "summary" : "Estado de un documento boleta",
+        "description" : "Obtencion del estado de una boleta",
+        "operationId" : "get.estado",
+        "parameters" : [ {
+          "name" : "rut",
+          "in" : "path",
+          "description" : "rut de la empresa emisora de la boleta",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "dv",
+          "in" : "path",
+          "description" : "dv de la empresa emisora de la boleta",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "tipo",
+          "in" : "path",
+          "description" : "tipo del documento",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "folio",
+          "in" : "path",
+          "description" : "folio emitido por la empresa",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "rut_receptor",
+          "in" : "query",
+          "description" : "Rut Receptor de la boleta electronica",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "dv_receptor",
+          "in" : "query",
+          "description" : "Dv Receptor de la boleta electronica",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "monto",
+          "in" : "query",
+          "description" : "monto de la boleta electronica",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "fecha",
+          "in" : "query",
+          "description" : "fecha de emision de la boleta electronica (formato DD-MM-YYYY)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Location" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Location"
+                }
+              },
+              "Retry-After" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/Retry-After"
+                }
+              },
+              "X-RateLimit-Limit" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Limit"
+                }
+              },
+              "X-RateLimit-Remaining" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Remaining"
+                }
+              },
+              "X-RateLimit-Reset" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "$ref" : "#/components/headers/X-RateLimit-Reset"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EstadoBoletaRespuesta"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "(HTTP 405) Limite Excedido",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Error inesperado",
+            "content" : { }
+          }
+        },
+        "security" : [ {
+          "TOKEN" : [ ]
+        } ],
+        "x-codegen-request-body-name" : "body"
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Error" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "EstadoBoletaRespuesta" : {
+        "type" : "object",
+        "properties" : {
+          "codigo" : {
+            "type" : "string",
+            "description" : "* DOK - Documento Recibido por el SII. Datos Coinciden con los Registrados\n* DNK - Documento Recibido por el SII pero Datos NO Coinciden con los registrados\n* FAU - Documento No Recibido por el SII\n* FNA - Documento No Autorizado\n* FAN - Documento Anulado.\n* EMP - Empresa No Autorizada a Emitir Documentos Tributarios Electronicos\n* TMD - Existe Nota de Debito que Modifica el Texto Documento\n* TMC - Existe Nota de Crédito que Modifica el Texto\n* MMD - Existe Nota de Debito que Modifica Montos Documento\n* MMC - Existe Nota de Crédito que Modifica Montos Documento\n* AND - Existe Nota de Debito que anula Documento\n* ANC - Existe Nota de Crédito que anula Documento\n",
+            "enum" : [ "DOK", "DNK", "FAU", "FNA", "FAN", "EMP", "TMD", "TMC", "MMD", "MMC", "AND", "ANC" ]
+          },
+          "descripcion" : {
+            "maxLength" : 80,
+            "type" : "string",
+            "description" : "Descripcion del estado de la Boleta"
+          }
+        },
+        "example" : {
+          "codigo" : "DNK",
+          "descripcion" : "Documento Recibido por el SII pero Datos NO Coinciden con los registrados"
+        }
+      },
+      "ResultadoPostData" : {
+        "type" : "object",
+        "properties" : {
+          "rutSender" : {
+            "type" : "integer"
+          },
+          "dvSender" : {
+            "type" : "string"
+          },
+          "rutCompania" : {
+            "type" : "integer"
+          },
+          "dvCompania" : {
+            "type" : "string"
+          },
+          "file" : {
+            "type" : "string"
+          },
+          "idEnvio" : {
+            "type" : "string"
+          },
+          "estado" : {
+            "type" : "string"
+          }
+        },
+        "example" : {
+          "rutSender" : 83154595,
+          "dvSender" : "0",
+          "rutCompania" : 45000054,
+          "dvCompania" : "K",
+          "file" : "boleta-2020-09-01-001.xml",
+          "idEnvio" : "1014",
+          "estado" : "PRD"
+        }
+      },
+      "ResultadoEnvioDataRespuesta" : {
+        "type" : "object",
+        "properties" : {
+          "rut_emisor" : {
+            "type" : "string",
+            "description" : "Formato RUT-DV, ejemplo 45000054-K"
+          },
+          "rut_envia" : {
+            "type" : "string",
+            "description" : "Formato RUT-DV, ejemplo 8315495-0"
+          },
+          "trackid" : {
+            "type" : "string"
+          },
+          "fecha_recepcion" : {
+            "type" : "string",
+            "description" : "Formato DD/MM/YYYY HH:MM:SS"
+          },
+          "estado" : {
+            "type" : "string",
+            "description" : "* REC\t- Envio recibido\n* EPR\t- ENVIO PROCESADO\n* CRT\t- Caratula OK\n* FOK\t- Firma de Envio Validada\n* PRD\t- Envio en Proceso\n* RCH\t- Rechazado por errores en informacion\n* RCO\t- Rechazado por consistencia\n* VOF\t- No se encontro el archivo .xml \n* RFR\t- Rechazado por error en firma\n* RPR\t- Aceptado con Reparos\n* RPT\t- Envio Repetido Rechazado\n* RSC\t- Rechazado por Schema\n* SOK\t- Schema Validado\n* RCT- \tRechazado por Error en Caratula              \n",
+            "enum" : [ "CRT", "EPR", "FOK", "PRD", "RCH", "RCO", "VOF", "REC", "RFR", "RPR", "RPT", "RSC", "SOK", "RCT" ]
+          },
+          "estadistica" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ResultadoEnvioDataRespuesta_estadistica"
+            }
+          },
+          "detalle_rep_rech" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ResultadoEnvioDataRespuesta_detalle_rep_rech"
+            }
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "codigo" : {
+            "type" : "string"
+          },
+          "descripcion" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "codigo" : {
+            "type" : "integer"
+          },
+          "descripcion" : {
+            "maxLength" : 50,
+            "type" : "string"
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "rutSender" : {
+            "type" : "integer"
+          },
+          "dvSender" : {
+            "type" : "string"
+          },
+          "rutCompany" : {
+            "type" : "integer"
+          },
+          "dvCompany" : {
+            "type" : "string"
+          },
+          "archivo" : {
+            "type" : "string",
+            "format" : "binary"
+          }
+        },
+        "example" : {
+          "rutSender" : 8315495,
+          "dvSender" : "0",
+          "rutCompany" : 45000054,
+          "dvCompany" : "K"
+        }
+      },
+      "ResultadoEnvioDataRespuesta_estadistica" : {
+        "type" : "object",
+        "properties" : {
+          "tipo" : {
+            "type" : "integer",
+            "description" : "* 39\t- Boleta Electronica\n* 41\t- Boleta Exenta Electronica\n",
+            "enum" : [ 39, 41 ]
+          },
+          "informados" : {
+            "type" : "integer"
+          },
+          "aceptados" : {
+            "type" : "integer"
+          },
+          "rechazados" : {
+            "type" : "integer"
+          },
+          "reparos" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "ResultadoEnvioDataRespuesta_error" : {
+        "type" : "object",
+        "properties" : {
+          "seccion" : {
+            "type" : "string",
+            "description" : "* ENV - Envio\n* CRT - Caratula\n* TED - Timbre Electronico del Documento\n* CAF - Codigo de Autorizacion de Folios \n* DTE - Documento Tributario Electrónico\n* HED - Header (cabecera del documento)\n* DET - Detalle del documento\n* REF - Referencias\n* DRG - Descuento y Recargos Globales\n",
+            "enum" : [ "ENV", "CRT", "TED", "CAF", "DTE", "HED", "DET", "REF", "DRG" ]
+          },
+          "linea" : {
+            "type" : "integer"
+          },
+          "nivel" : {
+            "type" : "integer",
+            "description" : "* 1 - Reparo leve\n* 2 - Reparo\n* 3 - Rechazo\n"
+          },
+          "codigo" : {
+            "type" : "integer"
+          },
+          "descripcion" : {
+            "type" : "string"
+          },
+          "detalle" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ResultadoEnvioDataRespuesta_detalle_rep_rech" : {
+        "type" : "object",
+        "properties" : {
+          "folio" : {
+            "type" : "integer"
+          },
+          "tipo" : {
+            "type" : "integer",
+            "description" : "* 39\t- Boleta Electronica\n* 41\t- Boleta Exenta Electronica\n",
+            "enum" : [ 39, 41 ]
+          },
+          "estado" : {
+            "type" : "string",
+            "description" : "* DOK - Dte Aceptado\n* RPR - Dte Aceptado con reparos\n* RCH - DTE Rechazado\n* RLV - Dte Aceptado con reparos leves\n",
+            "enum" : [ "DOK", "RPR", "RCH", "RLV" ]
+          },
+          "descripcion" : {
+            "type" : "string"
+          },
+          "error" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ResultadoEnvioDataRespuesta_error"
+            }
+          }
+        }
+      }
+    },
+    "responses" : {
+      "NoAutorizado" : {
+        "description" : "(HTTP 401) No autorizado para acceder a este recurso",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NoDisponible" : {
+        "description" : "* (HTTP 403) No Disponible, ver header Retry-After para ver cuando estara disponible.\n* Tambien vea header Link, para ver que recurso estara disponible\n",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "LimiteExcedido" : {
+        "description" : "(HTTP 405) Limite Excedido",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "headers" : {
+      "Location" : {
+        "description" : "URL para consultar el resultado. Debe esperar la cantidad de segundos que viene descrita en Rety-After, antes de utilizarla. Aqui se consultara el envio realizado por la empresa 45000054-K con trackid 1014",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "string"
+        },
+        "example" : "/boleta.electronica.envio/45000054-K/1014"
+      },
+      "Retry-After" : {
+        "description" : "Cantidad de segundos que debe esperar para utilizar url que viene en Location. Es \"muy importante\" respetar estos segundos, ya que con eso ayuda al resto de la comunidad.",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "integer"
+        },
+        "example" : 10
+      },
+      "X-RateLimit-Limit" : {
+        "description" : "Cantidad de Requerimientos por hora.",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "integer"
+        },
+        "example" : 600
+      },
+      "X-RateLimit-Remaining" : {
+        "description" : "Numero de Requerimientos que quedan en la ventana de tiempo.",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "integer"
+        },
+        "example" : 580
+      },
+      "X-RateLimit-Reset" : {
+        "description" : "La hora en que el contador de requerimientos se reinicia",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "example" : "2020-09-01T12:00:00Z"
+      },
+      "Etag" : {
+        "description" : "Un resumen (hash) del contenido de un recurso, el cual se utiliza para ver si ha cambiado. Se utilizara en comando GET en el headers \"If-None-Match\"",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "string"
+        },
+        "example" : "6ewe6w6ewe6w6ewew6ew6e6543543o2o2o2o3pp0"
+      },
+      "If-None-Match" : {
+        "description" : "Se utiliza este comando en el header de Request para saber si un recurso ha cambiado desde que el servidor en vio el hash en el requet de response llamado \"Etag\". Lo bueno de utilizar este mecanismo es que no se cuentan como requerimiento, por lo tanto el parametro X-RateLimit-Remaining no decrece.",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "string"
+        },
+        "example" : "6ewe6w6ewe6w6ewew6ew6e6543543o2o2o2o3pp0"
+      },
+      "Last-Modified" : {
+        "description" : "Fecha en que cambio el contenido de un recurso. Se puede utilizar en comando GET en el header \"If-Modified-Since\"",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "example" : "2020-09-01T12:00:00Z"
+      },
+      "If-Modified-Since" : {
+        "description" : "Se utiliza este comando en el header de Request para saber si un recurso ha cambiado desde la fecha entregada por el servidor en el request de response llamado \"Last-Modified\". Lo bueno de utilizar este mecanismo es que no se cuentan como requerimiento, por lo tanto el parametro X-RateLimit-Remaining no decrece.",
+        "style" : "simple",
+        "explode" : false,
+        "schema" : {
+          "type" : "string"
+        },
+        "example" : "6ewe6w6ewe6w6ewew6ew6e6543543o2o2o2o3pp0"
+      }
+    },
+    "securitySchemes" : {
+      "TOKEN" : {
+        "type" : "apiKey",
+        "description" : "# Autenticacion SII\n Ejemplo: TOKEN=YZVQNQY4J5DT9\n",
+        "name" : "Cookie",
+        "in" : "header"
+      }
+    }
+  }
+}
